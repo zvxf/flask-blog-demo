@@ -1,0 +1,8 @@
+wtforms
+werkzeug
+sqlalchemy
+flask
+flask_login
+pymysql
+flask_sqlalchemy
+flask_wtf

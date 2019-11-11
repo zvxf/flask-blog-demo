@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% block title %}博客~{{ posts.title }}{% endblock %}
+{% block body %}
+
+<div class="am-g am-g-fixed blog-g-fixed">
+  <div class="col-md-8">
+
+
+    <article class="blog-main">
+      <h3 class="am-article-title">
+        <a href="#">{{ posts.title }}</a>
+      </h3>
+      <h4 class="am-article-meta blog-meta">by <a href="">{{ posts['author'].uname }}</a> {{ posts.time }}
+      </h4>
+      <hr class="am-article-divider blog-hr">
+      <div class="am-g">
+        <div class="col-sm-12">
+          {{ posts.body }}
+        </div>
+      </div>
+    </article>
+
+    <hr class="am-article-divider blog-hr">
+
+  </div>
+
+  <div class="col-md-4 blog-sidebar">
+    {% include 'blog/sidebar.html' %}
+  </div>
+
+</div>
+
+{% endblock %}

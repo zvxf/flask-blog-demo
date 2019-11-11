@@ -1,0 +1,26 @@
+    <div class="am-panel-group">
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">关于我</div>
+        <div class="am-panel-bd">
+          <p>前所未有的中文云端字型服务，让您在 web 平台上自由使用高品质中文字体，跨平台、可搜寻，而且超美。云端字型是我们的事业，推广字型学知识是我们的志业。从字体出发，关心设计与我们的生活，justfont blog
+            正是為此而生。</p>
+          <a class="am-btn am-btn-success am-btn-sm" href="#">查看更多 →</a>
+        </div>
+      </section>
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">分类</div>
+        <ul class="am-list blog-list">
+            {% for c in c %}
+          <li><a href="/category/{{ c.cname }}">{{c.cname }}</a></li>
+            {% endfor %}
+        </ul>
+      </section>
+       <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">标签</div>
+        <ul class="am-list blog-list">
+            {% for t in t %}
+          <li><a href="/tag/{{ t.tname }}">{{ t.tname }}</a></li>
+            {% endfor %}
+        </ul>
+      </section>
+    </div>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="alternate icon" type="image/png" href="static/img/favicon.png">
+  <link rel="stylesheet" href="static/css/amazeui.min.css"/>
+  <style>
+    @media only screen and (min-width: 1200px) {
+      .blog-g-fixed {
+        max-width: 1200px;
+      }
+    }
+
+    @media only screen and (min-width: 641px) {
+      .blog-sidebar {
+        font-size: 1.4rem;
+      }
+    }
+
+    .blog-main {
+      padding: 20px 0;
+    }
+
+    .blog-title {
+      margin: 10px 0 20px 0;
+    }
+
+    .blog-meta {
+      font-size: 14px;
+      margin: 10px 0 20px 0;
+      color: #222;
+    }
+
+    .blog-meta a {
+      color: #27ae60;
+    }
+
+    .blog-pagination a {
+      font-size: 1.4rem;
+    }
+
+    .blog-team li {
+      padding: 4px;
+    }
+
+    .blog-team img {
+      margin-bottom: 0;
+    }
+
+    .blog-footer {
+      padding: 10px 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<header class="am-topbar am-topbar-fixed-top">
+    <div class="am-container">
+
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+          data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+      class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+    <ul class="am-nav am-nav-pills am-topbar-nav">
+      <li class="am-active"><a href="#">首页</a></li>
+      <li><a href="#">项目</a></li>
+      <li><a href="#">项目</a></li>
+      <li class="am-dropdown" data-am-dropdown>
+        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+          菜单 <span class="am-icon-caret-down"></span>
+        </a>
+        <ul class="am-dropdown-content">
+          <li class="am-dropdown-header">标题</li>
+          <li><a href="#">关于我们</a></li>
+          <li><a href="#">关于字体</a></li>
+          <li><a href="#">TIPS</a></li>
+        </ul>
+      </li>
+    </ul>
+      {% if session.get('username') %}
+          <div class="am-topbar-right">
+          欢迎您，{{ username }}
+          </div>
+      {% else %}
+      <div class="am-topbar-right">
+        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm" onclick="register()"><span class="am-icon-pencil"></span> 注册</button>
+          <script>
+              function register() {
+                   window.location.href='/register/'
+              }
+          </script>
+      </div>
+      <div class="am-topbar-right">
+        <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm" onclick="login()"><span class="am-icon-user"></span> 登录</button>
+          <script>
+              function login() {
+                   window.location.href='/login/'
+              }
+          </script>
+      </div>
+     {% endif %}
+    <form class="am-topbar-form am-topbar-left am-form-inline am-topbar-right" role="search" action="/search/">
+      <div class="am-form-group">
+        <input type="text" class="am-form-field am-input-sm" placeholder="搜索文章">
+      </div>
+      <button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
+    </form>
+  </div>
+
+    </div>
+</header>
+
+<div class="am-g am-g-fixed blog-g-fixed">
+  <div class="col-md-8">
+
+
+{% for i in article%}
+
+
+    <article class="blog-main">
+      <h3 class="am-article-title blog-title">
+        <a href="/article/{{ i.id }}">{{ i.title}}</a>
+      </h3>
+        {%  if user_list == i.user_id %}
+            {{ user_list.name }}
+        {% endif %}
+      <h4 class="am-article-meta blog-meta">{{ user_list.name }}发布时间：{{ i.create_time }}</h4>
+
+      <div class="am-g blog-content">
+        <div class="col-lg-7">
+          <p>摘要：{{ i.abstract }}</p>
+        </div>
+        <div class="col-lg-5">
+          <p><img src="http://f.cl.ly/items/451O3X0g47320D203D1B/不夠活潑.jpg"></p>
+        </div>
+      </div>
+      <div class="am-g">
+        <div class="col-sm-12">
+          <p>浏览数:【{{ i.visiting }}】</p>
+        </div>
+      </div>
+    </article>
+
+    <hr class="am-article-divider blog-hr">
+{% endfor %}
+
+    <ul class="am-pagination blog-pagination">
+      <li class="am-pagination-prev"><a href="">&laquo; 上一页</a></li>
+      <li class="am-pagination-next"><a href="">下一页 &raquo;</a></li>
+    </ul>
+  </div>
+
+  <div class="col-md-4 blog-sidebar">
+    <div class="am-panel-group">
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">关于我</div>
+        <div class="am-panel-bd">
+          <p>前所未有的中文云端字型服务，让您在 web 平台上自由使用高品质中文字体，跨平台、可搜寻，而且超美。云端字型是我们的事业，推广字型学知识是我们的志业。从字体出发，关心设计与我们的生活，justfont blog
+            正是為此而生。</p>
+          <a class="am-btn am-btn-success am-btn-sm" href="#">查看更多 →</a>
+        </div>
+      </section>
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">文章目录</div>
+        <ul class="am-list blog-list">
+            {% for j in article %}
+            <li><a href="/article/{{ j.id }}">{{ j.title }}</a></li>
+            {% endfor %}
+        </ul>
+      </section>
+
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">团队成员</div>
+        <div class="am-panel-bd">
+          <ul class="sm-block-grid-4 blog-team">
+
+            <li>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</div>
+
+<footer class="blog-footer">
+  <p>blog template<br/>
+    <small>© Copyright fork.cool. by AmazeUI.</small>
+  </p>
+</footer>
+
+<script src="static/js/zepto.min.js"></script>
+<script src="static/js/amazeui.min.js"></script>
+</body>
+</html>

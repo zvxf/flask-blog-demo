@@ -1,0 +1,56 @@
+{% extends 'admin/base.html' %}
+{% block body %}
+  <!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> / <small>一些常用模块</small></div>
+    </div>
+
+    <ul class="sm-block-grid-1 md-block-grid-4 am-margin am-padding am-text-center admin-content-list ">
+      <li><a href="/admin/add/" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>写博客<br/></a></li>
+      <li><a href="#" class="am-text-warning"><span class="am-icon-btn am-icon-briefcase"></span><br/>文档整理<br/></a></li>
+      <li><a href="#" class="am-text-danger"><span class="am-icon-btn am-icon-recycle"></span><br/>访问量<br/></a></li>
+      <li><a href="#" class="am-text-secondary"><span class="am-icon-btn am-icon-user-md"></span><br/>用户管理<br/></a></li>
+    </ul>
+
+    <div class="am-g">
+      <div class="col-sm-12">
+        <table class="am-table am-table-bd am-table-striped admin-content-table">
+          <thead>
+          <tr>
+            <th>ID</th><th>用户名</th><th>最新发布博文</th><th>浏览量</th><th>管理</th>
+          </tr>
+          </thead>
+          <tbody>
+
+
+        {% for post in posts %}
+
+          <tr><td>{{ post['author'].uid }}</td><td>{{ post['author'].uname }}</td><td><a href="/post/{{ post.pid }}">{{ post.title }}</a> </td><td><span class="am-badge am-badge-danger">+{{ post.read }}</span></td>
+            <td>
+              <div class="am-dropdown" data-am-dropdown>
+                <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
+                <ul class="am-dropdown-content">
+                  <li><a href="/admin/update/{{ post.pid }}">1. 编辑</a></li>
+                  <li><a href="/admin/delete/{{ post.pid }}">2. 删除</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+  <!-- content end -->
+
+{% endblock %}
+
+

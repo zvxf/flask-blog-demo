@@ -1,0 +1,23 @@
+{% extends 'admin/base.html' %}
+{% block body %}
+<div class="admin-content">
+     <div class="am-g">
+      <div class="col-sm-12">
+ <form method="post" class="am-form">
+{{form.csrf_token}}
+      <label for="text"> 博客标题：</label>
+      <input type="text" name="title">
+      <br>
+      <label for="text"> 博客摘要：</label>
+      <input type="text" name="head">
+     <br>
+       <label for="text">博客内容 ：</label>
+      <input type="text" style="height: 200px" name="body">
+     <br>
+
+      <div class="am-cf">
+        <input type="submit"  value="提交修改" class="am-btn am-btn-primary am-btn-sm am-fl">
+      </div>
+    </form>
+      </div></div></div>
+{% endblock %}

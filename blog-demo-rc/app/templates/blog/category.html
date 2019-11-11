@@ -1,0 +1,50 @@
+{% extends 'blog/base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="am-g am-g-fixed blog-g-fixed">
+  <div class="col-md-8">
+
+
+   {% for post in posts %}
+    <article class="blog-main">
+      <h6 class="am-article-title">
+        <a href="/post/{{ post['pid'] }}">{{ post['title'] }}</a>
+      </h6>
+      <div class="am-g">
+        <div class="col-sm-12">
+            <P>{{ post['body'] }}</P>
+        </div>
+
+      </div>
+        <div class="am-article-meta am-align-left"><span class="am-align-left"><a href="/tag/{{ post['tag'].tname}}">Tag:&nbsp;&nbsp;{{ post['tag'].tname}}</a></span><span><a href="/category/{{ post['category'].cname }}">Category:&nbsp;&nbsp;{{ post['category'].cname }}</a></span></div>
+        <div class="am-article-meta  am-align-right"><span class="am-align-left">Author:&nbsp;&nbsp;{{ post['author'].uname }}</span><span>&nbsp;&nbsp;{{ post['time'] }}</span></div>
+    </article>
+
+    <hr class="am-article-divider blog-hr">
+{% endfor %}
+
+    <hr class="am-article-divider blog-hr">
+{% if  pagination %}
+
+    <ul class="am-pagination blog-pagination">
+        {%if pagination.prev_num != None %}
+        <li class="am-pagination-prev"><a href="{{ url }}?page={{ pagination.prev_num }}"><~上一页</a></li>
+        {% else %}
+        <li class="am-pagination-prev">首页</li>
+        {% endif %}
+        {%if pagination.next_num != None %}
+            <li class="am-pagination-next"><a href="{{ url }}?page={{ pagination.next_num}}">下一页~></a></li>
+        {% else %}
+            <li class="am-pagination-next">末页</li>
+        {% endif %}
+            </ul>
+  {% endif %}
+  </div>
+
+  <div class="col-md-4 blog-sidebar">
+
+  </div>
+
+</div>
+
+{% endblock %}

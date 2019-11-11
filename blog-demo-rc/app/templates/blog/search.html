@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+{% block title %}{{ info }}{% endblock %}
+{% block body %}
+<p></p>
+ <div class="am-panel-group am-container ">
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">搜索结果</div>
+        <div class=" am-g">
+        <div class="am-container" >
+        <ul class="am-list am-container  ">
+<P>
+          {% for records in records %}
+                <li>文章标题：{{ records['title'] }}</li>
+                <li>作者：{{ records['author'].uname }}</li>
+                <li>发表时间：{{ records['time'] }}</li>
+                <li>内容：{{ records['body'] }}</li>
+            {% endfor %}
+</P>
+        </ul></div>
+        </div>
+      </section>
+<div class="am-container" >
+ {% if  pagination %}
+    <ul class="am-pagination blog-pagination">
+        {%if pagination.prev_num != None %}
+        <li class="am-pagination-prev"><a href="/search/?page={{ pagination.prev_num }}"><~上一页</a></li>
+        {% else %}
+        <li class="am-pagination-prev">首页</li>
+        {% endif %}
+        {%if pagination.next_num != None %}
+            <li class="am-pagination-next"><a href="/search/?page={{ pagination.next_num}}">下一页~></a></li>
+        {% else %}
+            <li class="am-pagination-next">末页</li>
+        {% endif %}
+            </ul>
+  {% endif %}
+</div>
+{% endblock %}
