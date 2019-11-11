@@ -1,4 +1,6 @@
 # 使用flask编写的blog
+
+
 ### blog-demo   只是简单的使用，不再说明。
 # blog-demo-rc  
 wsgi.py         作为入口文件
